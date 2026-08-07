@@ -1,4 +1,5 @@
 const usersUrl = 'https://jsonplaceholder.typicode.com/users'
+const allUsers = []
 
 async function fetchUsers(url) {
         console.log('fetching url');
@@ -26,11 +27,22 @@ function renderUsers(array) {
     });
 }
 
+function filterUsers() {
+    const searchValue = document.getElementById('search').value.toLowerCase()
+
+    const userSearch = allUsers.filter(user =>
+         user.name.toLowerCase().includes(searchValue)
+    )
+    document.getElementById('user-list').innerHTML = ''
+    renderUsers(userSearch)
+}
+
 async function main() {
     try {
         const users = await fetchUsers(usersUrl)
+        allUsers.push(...users)
         console.log('adding users list to the HTML');
-        renderUsers(users)
+        renderUsers(allUsers)
     } catch (error) {
         console.log(error);
     }
