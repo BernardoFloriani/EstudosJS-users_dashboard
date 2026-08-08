@@ -45,6 +45,7 @@ async function main() {
         renderUsers(allUsers)
     } catch (error) {
         console.log(error);
+        document.getElementById('error-message').style.display = 'block'
     }
     
 }
